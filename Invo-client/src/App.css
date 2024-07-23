@@ -3,3 +3,11 @@
 body{
   font-family: 'Inter', sans-serif;
 }
+
+header{
+  z-index:10001 !important;
+}
+
+.section-container {
+  @apply max-w-screen-2xl container mx-auto xl:px-24 px-4;
+}
