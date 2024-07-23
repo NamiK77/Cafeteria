@@ -11,3 +11,16 @@ header{
 .section-container {
   @apply max-w-screen-2xl container mx-auto xl:px-24 px-4;
 }
+
+
+.subtitle{
+  @apply text-red uppercase tracking-wide font-medium text-lg
+}
+
+.title{
+  @apply text-4xl md:text-5xl font-bold my-2 md:leading-snug
+}
+
+.heartStar{
+  border-radius: 0px 28px 0px 28px;
+}
