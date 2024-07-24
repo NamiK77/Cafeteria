@@ -28,13 +28,15 @@ const Navbar=()=> {
   const navItems = 
   (
   <>
-  <ul className="menu menu-horizontal px-1">
-      <li><a href='/'>Home</a></li>
+ 
+      <li>
+        <a className='text-green' href='/'>Home</a>
+        </li>
       <li tabIndex={0}>
         <details>
           <summary>Menu</summary>
           <ul className="p-2">
-            <li><a>All</a></li>
+            <li><a href='/menu'>All</a></li>
             <li><a>Salad</a></li>
             <li><a>Pizza</a></li>
           </ul>
@@ -51,7 +53,7 @@ const Navbar=()=> {
         </details>
       </li>
       <li><a>Offers</a></li>
-    </ul>
+    
   </>);
   return (
     <header className='max-w-screen-2x1 container mx-auto fixed top-0 left-0 right-0 transition-all
