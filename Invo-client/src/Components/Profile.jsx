@@ -5,17 +5,17 @@ import { useNavigate } from "react-router-dom";
 
 const Profile = ({ user }) => {
   const { logOut } = useContext(AuthContext);
-  const navigate = useNavigate()
+  //const navigate = useNavigate()
 
   // logout
   const handleLogout = () => {
     logOut()
       .then(() => {
         // Sign-out successful.
-        navigate("/")
+        // navigate("/")
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 

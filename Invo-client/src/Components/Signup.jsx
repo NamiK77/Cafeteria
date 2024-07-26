@@ -18,6 +18,7 @@ const Signup = () => {
       //redirecting to home page or specific page
   const location = useLocation();
   const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
 
       const onSubmit = (data) => {
         const email = data.email;
