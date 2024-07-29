@@ -17,37 +17,71 @@ const Cards = ({item}) => {
 
     //add to cart btn
     const handleAddtoCart = (item) => {
-      // console.log("btn is clicked", item);
-      if(user && user?.email){
-        const cartItem = {menuItemID :_id, name, quantity:1, image,price,email:user.email };
-        // console.log(cartItem)
-        fetch('http://localhost:6001/carts',{
+      if (user && user.email) {
+        const cartItem = {
+          menuItemId: item._id, // Adjusted to match server-side expectation
+          name: item.name,
+          recipe: item.recipe,
+          image: item.image,
+          price: item.price,
+          quantity: 1,
+          email: user.email
+        };
+    
+        console.log("Payload:", cartItem);
+    
+        fetch('http://localhost:6001/carts', {
           method: 'POST',
           headers: {
-            'content-type':'application/json'
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify(cartItem)
-
-        }).then(res => res.json()).then(data =>{
-          // console.log(data);
-          if(data.insertedId){
+        })
+        .then(res => {
+          if (!res.ok) {
+            return res.json().then(err => {
+              throw new Error(err.message);
+            });
+          }
+          return res.json();
+        })
+        .then(data => {
+          console.log("Response data:", data);
+          if (data._id) {
             Swal.fire({
-              position: "top-end",
+              position: "center",
               icon: "success",
-              title: "Items Added To Cart",
+              title: "Item Added To Cart",
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }
+        })
+        .catch(error => {
+          if (error.message === 'Product already exists in your cart!') {
+            Swal.fire({
+              position: "center",
+              icon: "warning",
+              title: "Product already in cart",
+              showConfirmButton: false,
+              timer: 1500
+            });
+          } else {
+            console.error("Error:", error.message);
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Failed to add to cart",
+              text: error.message,
               showConfirmButton: false,
               timer: 1500
             });
           }
         });
-
-
-      }
-      else{
-
+      } else {
         Swal.fire({
           title: "Please Login",
-          text: "Without login You cant access it !!",
+          text: "Without login, you can't access it!",
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -55,7 +89,7 @@ const Cards = ({item}) => {
           confirmButtonText: "Login"
         }).then((result) => {
           if (result.isConfirmed) {
-            navigate('/signup',{state:{from: location}})
+            navigate('/signup', { state: { from: location } });
           }
         });
 
