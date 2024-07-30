@@ -6,7 +6,9 @@ import Signup from "../Components/Signup";
 import PrivateRoute from "../PrivateRouter/PrivateRouter";
 import UpdateProfile from "../Pages/dashboard/UpdateProfile";
 import CartPage from "../Pages/shop/CartPage";
-
+import DashboardLayout from "../layout/DashboardLayout";
+import Users from "../Pages/dashboard/admin/Users";
+import Dashboard from "../Pages/dashboard/admin/Dashboard";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -37,6 +39,22 @@ const router = createBrowserRouter([
       path: "/signup",
       element: <Signup/>
     },
+    {
+      path:'dashboard',
+      element: <PrivateRoute><DashboardLayout/></PrivateRoute>,
+      children:[
+        {
+          path: '',
+          element: <Dashboard/>
+        },
+        {
+          path: 'users', 
+          element: <Users/>
+        },
+      ]
+    }
+   
+
 
    
    

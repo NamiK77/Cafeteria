@@ -28,7 +28,7 @@ app.use('/carts',cartRoutes)
 
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Hello Future Billionaire NamiG')
 })
 
 app.listen(port, () => {
