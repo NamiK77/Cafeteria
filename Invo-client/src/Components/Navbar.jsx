@@ -1,56 +1,54 @@
-import React, { useContext, useEffect, useState } from 'react';
-import logo from '/logo.png'
+import React, { useContext, useEffect, useState } from "react";
+import logo from "/logo.png";
 import { FaRegUser } from "react-icons/fa";
 import Modal from "./Modal";
-import { AuthContext } from '../contexts/AuthProvider';
-import Profile from './Profile';
-import { Link } from 'react-router-dom';
-import useCart from '../hooks/useCart';
-const Navbar=()=> {
-  const [isSticky,setSticky] = useState(false);
+import Profile from "./Profile";
+import { Link } from "react-router-dom";
+import useCart from "../hooks/useCart";
+import useAuth from "../hooks/useAuth";
 
+const Navbar = () => {
+  const [isSticky, setSticky] = useState(false);
+  const {user, loading} = useAuth();
+  const [cart, refetch] = useCart();
 
-  const {user} = useContext(AuthContext);
-  console.log(user)
-
-  const[cart,refetch] = useCart();
-  console.log(cart)
-
-
-  //handle scroll functions
-  useEffect( () =>{
-    const handScroll = () => {
+  useEffect(() => {
+    const handleScroll = () => {
       const offset = window.scrollY;
-      if(offset > 0){
-        setSticky(true)
+      if (offset > 0) {
+        setSticky(true);
       } else {
-        setSticky(false)
-        
+        setSticky(false);
       }
     };
 
-    window.addEventListener("scroll", handScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
+  }, []);
 
-  },[])
-
-  const navItems = 
-  (
-  <>
- 
+  const navItems = (
+    <>
       <li>
-        <a className='text-green' href='/'>Home</a>
-        </li>
+        <a href="/" className="text-green">
+          Home
+        </a>
+      </li>
       <li tabIndex={0}>
         <details>
           <summary>Menu</summary>
           <ul className="p-2">
-            <li><a href='/menu'>All</a></li>
-            <li><a>Salad</a></li>
-            <li><a>Pizza</a></li>
+            <li>
+              <a href="/menu">All</a>
+            </li>
+            <li>
+              <a>Salad</a>
+            </li>
+            <li>
+              <a>Pizza</a>
+            </li>
           </ul>
         </details>
       </li>
@@ -58,18 +56,27 @@ const Navbar=()=> {
         <details>
           <summary>Services</summary>
           <ul className="p-2">
-            <li><a>Online Order</a></li>
-            <li><a>Table Booking</a></li>
-            <li><a>Order Tracking</a></li>
+            <li>
+              <a>Online Order</a>
+            </li>
+            <li>
+              <a>Table Booking</a>
+            </li>
+            <li>
+              <a>Order Tracking</a>
+            </li>
           </ul>
         </details>
       </li>
-      <li><a>Offers</a></li>
-    
-  </>);
+      <li>
+        <a>Offers</a>
+      </li>
+    </>
+  );
   return (
-    <header className='max-w-screen-2x1 container mx-auto fixed top-0 left-0 right-0 transition-all
-    duration-300 ease-in-out'>
+    <header
+      className={`max-w-screen-2xl container mx-auto fixed top-0 left-0 right-0 transition-all duration-300 ease-in-out`}
+    >
       <div
         className={`navbar xl:px-24 ${
           isSticky
@@ -77,41 +84,40 @@ const Navbar=()=> {
             : ""
         }`}
       >
-  <div className="navbar-start">
-    <div className="dropdown">
-      <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 6h16M4 12h8m-8 6h16" />
-        </svg>
-      </div>
-      <ul
-        tabIndex={0}
-        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-        
-        {navItems}
-      </ul>
-    </div>
-    <a href="/">
-      <img src={logo} alt="" />
-    </a>
-  </div>
-  <div className="navbar-center hidden lg:flex">
-    <ul className="menu menu-horizontal px-1">
-     {navItems}
-    </ul>
-  </div>
-  <div className="navbar-end">
-    {/* search btn */}
-  <button className="btn btn-ghost btn-circle hidden lg:flex">
+        <div className="navbar-start">
+          <div className="dropdown justify-between">
+            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </label>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-64 space-y-3"
+            >
+              {navItems}
+            </ul>
+          </div>
+          <a href="/">
+            <img src={logo} alt="" />
+          </a>
+        </div>
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">{navItems}</ul>
+        </div>
+        <div className="navbar-end ">
+          <button className="btn btn-ghost btn-circle hidden lg:flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -128,11 +134,11 @@ const Navbar=()=> {
             </svg>
           </button>
          
-    {/* cart items */}
-    <Link to="cart-page">
-    <label
+         {/* shopping cart */}
+         <Link to="/cart-page">
+         <label
             tabIndex={0}
-            className="btn btn-ghost btn-circle mr-3 lg:flex hidden items-center justify-center"
+            className="btn btn-ghost btn-circle  lg:flex items-center justify-center mr-3"
           >
             <div className="indicator">
               <svg
@@ -152,23 +158,22 @@ const Navbar=()=> {
               <span className="badge badge-sm indicator-item">{cart.length || 0}</span>
             </div>
           </label>
-    </Link>
-    
-          {/* login btn */}
-          {
-            user? <Profile user={user}/>:
-            <button onClick={()=>document.getElementById('my_modal_5').showModal()} className="btn bg-green rounded-full px-6 text-white flex items-center gap-2"><FaRegUser /> Login</button>
+         </Link>
 
+          {/* login button */}
+
+          { 
+            user ? <>
+           <Profile user={user}/>
+          </> : <button onClick={()=>document.getElementById('my_modal_5').showModal()} className="btn flex items-center gap-2 rounded-full px-6 bg-green text-white">
+            <FaRegUser /> Login
+          </button>
           }
-
-
-    {/* <button onClick={()=>document.getElementById('my_modal_5').showModal()} className="btn bg-green rounded-full px-6 text-white flex items-center gap-2"><FaRegUser /> Login</button> */}
-    <Modal/>
-  </div>
-</div>
-      
+          <Modal/>
+        </div>
+      </div>
     </header>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

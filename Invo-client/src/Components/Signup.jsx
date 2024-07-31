@@ -1,69 +1,82 @@
-// import React from 'react'
+import React, { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaFacebookF, FaGithub, FaGoogle, FaRegUser } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import {Link,useLocation,useNavigate} from "react-router-dom";
-import Modal from './Modal';
-import { AuthContext } from '../contexts/AuthProvider';
-import React, { useContext } from "react";
+import Modal from "./Modal";
+import { AuthContext } from "../contexts/AuthProvider";
+import axios from "axios";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Signup = () => {
-    const {
-        register,
-        handleSubmit,
-        
-        formState: { errors },
-      } = useForm();
+  const { signUpWithGmail, createUser, updateUserProfile } =
+    useContext(AuthContext);
+    const axiosPublic = useAxiosPublic();
 
-      const {createUser, login} = useContext(AuthContext);
-      //redirecting to home page or specific page
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
+
   const from = location.state?.from?.pathname || "/";
 
-      const onSubmit = (data) => {
-        const email = data.email;
-        const password = data.password;
-            // console.log(email, password)
-        createUser(email, password)
-    .then((result) => {
-      const user = result.user;
-      alert("Sign in sucessfull")
-      document.getElementById("my_modal_5").close()
-      navigate(from,{replace: true})
-    })
-    .catch((error) =>{
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    })
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-};
+  const onSubmit = (data) => {
+    const email = data.email;
+    const password = data.password;
+    // console.log(email, password)
+    createUser(email, password)
+      .then((result) => {
+        // Signed up
+        const user = result.user;
+        updateUserProfile(data.email, data.photoURL).then(() => {
+          const userInfor = {
+            name: data.name,
+            email: data.email,
+          };
+          axiosPublic.post("/users", userInfor)
+            .then((response) => {
+              // console.log(response);
+              alert("Signin successful!");
+              navigate(from, { replace: true });
+            });
+        });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+  };
 
-// // login with google
-// const handleRegister = () => {
-//   signUpWithGmail().then(result =>{
-//     console.log(result.user);
-//     const userInfo = {
-//         email: result.user?.email,
-//         name: result.user?.displayName
-//     }
-//     axiosPublic.post('/users', userInfo)
-//     .then(res =>{
-//         console.log(res.data);
-//         navigate('/');
-//     })
-// })
-
-
-
-//       }
-
+  // login with google
+  const handleRegister = () => {
+    signUpWithGmail()
+      .then((result) => {
+        const user = result.user;
+        const userInfor = {
+          name: result?.user?.displayName,
+          email: result?.user?.email,
+        };
+        axiosPublic
+          .post("/users", userInfor)
+          .then((response) => {
+            // console.log(response);
+            alert("Signin successful!");
+            navigate("/");
+          });
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <div className="max-w-md bg-white shadow w-full mx-auto flex items-center justify-center my-20">
       <div className="mb-5">
         <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
           <h3 className="font-bold text-lg">Please Create An Account!</h3>
           {/* name */}
-          {/* <div className="form-control">
+          <div className="form-control">
             <label className="label">
               <span className="label-text">Name</span>
             </label>
@@ -73,7 +86,7 @@ const Signup = () => {
               className="input input-bordered"
               {...register("name")}
             />
-          </div> */}
+          </div>
 
           {/* email */}
           <div className="form-control">
@@ -119,37 +132,15 @@ const Signup = () => {
           </div>
 
           <div className="text-center my-2">
-            Have an account?{""}
-            <button className='underline text-red ml-1'
-            onClick={() => document.getElementById("my_modal_5").showModal()}
-            
-            >
-                login
-            </button>{""}
-            {/* <Link to="/login">
+            Have an account?
+            <Link to="/login">
               <button className="ml-2 underline">Login here</button>
-            </Link> */}
-          </div>
-
-          
-            {/* close btn */}
-            <Link
-            to="/"
-              
-              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-              
-            >
-              ✕
             </Link>
-
-
-          
+          </div>
         </form>
-
-
         <div className="text-center space-x-3">
           <button
-            // onClick={handleRegister}
+            onClick={handleRegister}
             className="btn btn-circle hover:bg-green hover:text-white"
           >
             <FaGoogle />
@@ -162,10 +153,8 @@ const Signup = () => {
           </button>
         </div>
       </div>
-      <Modal/>
-      
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;

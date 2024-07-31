@@ -4,10 +4,13 @@ import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../contexts/AuthProvider";
 import axios from "axios";
+import useAxiosPublic from "../hooks/useAxiosPublic";
+import useAuth from "../hooks/useAuth";
 
-const Modal = () => {
+const Login = () => {
   const [errorMessage, seterrorMessage] = useState("");
-  const { signUpWithGmail, login } = useContext(AuthContext);
+  const { signUpWithGmail, login } = useAuth();
+  const axiosPublic = useAxiosPublic();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -32,8 +35,8 @@ const Modal = () => {
           name: data.name,
           email: data.email,
         };
-        axios
-          .post("http://localhost:6001/users", userInfor)
+        axiosPublic
+          .post("/users", userInfor)
           .then((response) => {
             // console.log(response);
             alert("Signin successful!");
@@ -51,6 +54,7 @@ const Modal = () => {
   };
 
   // login with google
+  // login with google
   const handleRegister = () => {
     signUpWithGmail()
       .then((result) => {
@@ -59,8 +63,8 @@ const Modal = () => {
           name: result?.user?.displayName,
           email: result?.user?.email,
         };
-        axios
-          .post("http://localhost:6001/users", userInfor)
+        axiosPublic
+          .post("/users", userInfor)
           .then((response) => {
             // console.log(response);
             alert("Signin successful!");
@@ -69,12 +73,10 @@ const Modal = () => {
       })
       .catch((error) => console.log(error));
   };
-
   return (
-    <dialog id="my_modal_5" className="modal modal-middle sm:modal-middle">
-      <div className="modal-box">
-        <div className="modal-action flex-col justify-center mt-0">
-          <form
+    <div className="max-w-md bg-white shadow w-full mx-auto flex items-center justify-center my-20">
+    <div className="mb-5">
+    <form
             className="card-body"
             method="dialog"
             onSubmit={handleSubmit(onSubmit)}
@@ -131,13 +133,12 @@ const Modal = () => {
             </div>
 
             {/* close btn */}
+            <Link to="/">
             <div
-              htmlFor="my_modal_5"
               className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-              onClick={() => document.getElementById("my_modal_5").close()}
             >
               ✕
-            </div>
+            </div></Link>
 
             <p className="text-center my-2">
               Donot have an account?
@@ -146,24 +147,20 @@ const Modal = () => {
               </Link>
             </p>
           </form>
-          <div className="text-center space-x-3 mb-5">
-            <button
-              onClick={handleRegister}
-              className="btn btn-circle hover:bg-green hover:text-white"
-            >
-              <FaGoogle />
-            </button>
-            <button className="btn btn-circle hover:bg-green hover:text-white">
-              <FaFacebookF />
-            </button>
-            <button className="btn btn-circle hover:bg-green hover:text-white">
-              <FaGithub />
-            </button>
-          </div>
-        </div>
+    <div className="text-center space-x-3">
+        <button onClick={handleRegister} className="btn btn-circle hover:bg-green hover:text-white">
+          <FaGoogle />
+        </button>
+        <button className="btn btn-circle hover:bg-green hover:text-white">
+          <FaFacebookF />
+        </button>
+        <button className="btn btn-circle hover:bg-green hover:text-white">
+          <FaGithub />
+        </button>
       </div>
-    </dialog>
-  );
-};
+    </div>
+  </div>
+  )
+}
 
-export default Modal;
+export default Login

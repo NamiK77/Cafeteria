@@ -7,7 +7,7 @@ const Banner=() =>{
            
              {/*images */}
              <div className='md:w-1/2'>
-            <img src="/images/home/banner.png" alt="" />
+            <img src="/images/home/ishow1.png" alt="" />
             <div className='flex flex-col md:flex-row items-center justify-around -mt-14 gap-4'>
             <div className="flex bg-white px-3 py-2 rounded-2xl flex items-center gap-3 shadow-sm w-64">
                     <img src="images/home/b-food1.png" alt="" className='rounded-2xl'/>
@@ -107,7 +107,7 @@ const Banner=() =>{
         {/* texts */}
         <div className="md:w-1/2 px-4 space-y-7 px-4">
         <h2 className="md:text-5xl text-4xl font-bold md:leading-snug leading-snug">
-            Dive into Delights Of Delectable <span className="text-green">Food</span>
+             Savoring food is savoring life itself. <span className="text-green">Food</span>
           </h2>
           <p className="text-[#4A4A4A] text-xl">
             Where Each Plate Weaves a Story of Culinary Mastery and Passionate
