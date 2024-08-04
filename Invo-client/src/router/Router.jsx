@@ -11,6 +11,11 @@ import Users from "../Pages/dashboard/admin/Users";
 import Dashboard from "../Pages/dashboard/admin/Dashboard";
 import Login from "../Components/Login";
 import AddMenu from "../Pages/dashboard/admin/AddMenu";
+import ManageItems from "../Pages/dashboard/admin/ManageItems";
+import SalesItems from "../Pages/dashboard/admin/SalesItems";
+import UpdateMenu from "../Pages/dashboard/admin/UpdateMenu";
+
+
 const router = createBrowserRouter([
     {
       path: "/",
@@ -61,6 +66,19 @@ const router = createBrowserRouter([
           path: 'add-menu',
           element: <AddMenu/>
         }, 
+        {
+          path: "manage-items",
+          element: <ManageItems/>
+        },
+        {
+          path: "update-menu/:id",
+          element: <UpdateMenu/>,
+          loader: ({params}) => fetch(`http://localhost:6001/menu/${params.id}`)
+        },
+        {
+          path: 'sales-items',
+          element: <SalesItems/>
+        },
       ]
     }
    

@@ -89,7 +89,7 @@ const DashboardLayout = () => {
           <li>
             <Link to="/dashboard/add-menu">
               <FaPlusCircle />
-              Add Menu
+              Add Items
             </Link>
           </li>
           <li>
@@ -97,11 +97,19 @@ const DashboardLayout = () => {
               <FaEdit /> Manage Items
             </Link>
           </li>
-          <li className="mb-3">
-            <Link to="/dashboard/users">
-              <FaUser /> All Users
+          <li>
+            <Link to="/dashboard/sales-items">
+              <FaEdit /> Sales & Invoice
             </Link>
           </li>
+
+
+          <li className="mb-3">
+            <Link to="/dashboard/users">
+              <FaUser /> Manage Users
+            </Link>
+          </li>
+          
 
           <hr />
       
