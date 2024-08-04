@@ -26,6 +26,7 @@ catch((error) => console.log("Error  connection",error));
 
 
 
+
 // jwt authentication
 app.post('/jwt', async(req, res) => {
   const user = req.body;
