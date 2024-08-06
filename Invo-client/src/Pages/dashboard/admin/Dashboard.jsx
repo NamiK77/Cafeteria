@@ -4,21 +4,17 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import { FaBook, FaDollarSign, FaUsers } from "react-icons/fa";
 import {
-  BarChart,
-  Bar,
-  Cell,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   CartesianGrid,
+  Tooltip,
   PieChart,
   Pie,
-  Legend,
+  Cell,
   ResponsiveContainer,
-  ComposedChart,
-  Tooltip,
-  Area,
-  Line,
-  AreaChart,
+  Legend,
 } from "recharts";
 
 const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
@@ -28,11 +24,7 @@ const Dashboard = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const {
-    data: stats = {},
-    isLoading: isLoadingStats,
-    error: errorStats,
-  } = useQuery({
+  const { data: stats = {}, error: statsError } = useQuery({
     queryKey: ["admin-stats"],
     queryFn: async () => {
       const res = await axiosSecure.get("/admin-stats");
@@ -40,11 +32,7 @@ const Dashboard = () => {
     },
   });
 
-  const {
-    data: chartData = [],
-    isLoading: isLoadingChartData,
-    error: errorChartData,
-  } = useQuery({
+  const { data: chartData = [], error: chartDataError } = useQuery({
     queryKey: ["order-stats"],
     queryFn: async () => {
       const res = await axiosSecure.get("/order-stats");
@@ -52,36 +40,7 @@ const Dashboard = () => {
     },
   });
 
-  if (isLoadingStats || isLoadingChartData) {
-    return <div>Loading...</div>;
-  }
-
-  if (errorStats || errorChartData) {
-    console.error("Error fetching data", { errorStats, errorChartData });
-    return <div>Error loading data</div>;
-  }
-
-  console.log("Admin Stats:", stats);
-  console.log("Order Stats:", chartData);
-
-  // custom shape for the bar chart
-  const getPath = (x, y, width, height) => {
-    return `M${x},${y + height}C${x + width / 3},${y + height} ${
-      x + width / 2
-    },${y + height / 3}
-    ${x + width / 2}, ${y}
-    C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${y + height} ${
-      x + width
-    }, ${y + height}
-    Z`;
-  };
-
-  const TriangleBar = (props) => {
-    const { fill, x, y, width, height } = props;
-    return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
-  };
-
-  // custom shape for the pie chart
+  // Custom shape for the pie chart
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
     cx,
@@ -114,8 +73,14 @@ const Dashboard = () => {
 
   return (
     <div className="w-full md:w-[870px] mx-auto px-4 ">
-      <h2 className="text-2xl font-semibold my-4">Hi, {user.displayName}</h2>
-      {/* stats */}
+      <h2 className="text-2xl font-semibold my-4">
+        Hi, {user.displayName}
+      </h2>
+
+      {statsError && <div className="text-red-500">Failed to load stats</div>}
+      {chartDataError && <div className="text-red-500">Failed to load chart data</div>}
+
+      {/* Stats */}
       <div className="stats shadow flex flex-col md:flex-row">
         <div className="stat bg-emerald-200">
           <div className="stat-figure text-secondary">
@@ -166,9 +131,9 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* bar & pie chart */}
+      {/* Bar & Pie Chart */}
       <div className="mt-16 flex flex-col sm:flex-row">
-        {/* bar chart */}
+        {/* Area Chart */}
         <div className="sm:w-1/2 w-full">
           <div style={{ width: "100%", height: 300 }}>
             <ResponsiveContainer>
@@ -196,7 +161,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* pie chart */}
+        {/* Pie Chart */}
         <div className="sm:w-1/2 w-full">
           <div style={{ width: "100%", height: 300 }}>
             <ResponsiveContainer width="100%" height="100%">
@@ -212,7 +177,10 @@ const Dashboard = () => {
                   dataKey="value"
                 >
                   {pieChartData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
                   ))}
                 </Pie>
                 <Legend />

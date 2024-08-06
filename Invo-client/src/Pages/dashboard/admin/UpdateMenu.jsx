@@ -63,7 +63,7 @@ const UpdateMenu = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control w-full">
             <label className="label">
-              <span className="label-text">Recipe Name*</span>
+              <span className="label-text">Items Name*</span>
             </label>
             <input
               type="text"
@@ -89,10 +89,10 @@ const UpdateMenu = () => {
                 <option disabled value="default">
                   Select a category
                 </option>
-                <option value="salad">Salad</option>
-                <option value="pizza">Pizza</option>
-                <option value="soup">Soup</option>
-                <option value="dessert">dessert</option>
+                <option value="salad">Food</option>
+                <option value="pizza">Electro</option>
+                <option value="soup">Fruits</option>
+                <option value="dessert">Clothes</option>
                 <option value="drinks">Drinks</option>
                 <option value="popular">Popular</option>
               </select>
@@ -116,7 +116,7 @@ const UpdateMenu = () => {
           {/* 3rd row */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Recipe Details</span>
+              <span className="label-text">Items Details</span>
             </label>
             <textarea
              defaultValue={item.recipe}

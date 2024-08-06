@@ -85,17 +85,15 @@ const Menu = () => {
         <div className="py-48 flex flex-col items-center justify-center">
           {/* content */}
           <div className="text-center px-4 space-y-7">
-            <h2 className="md:text-5xl text-4xl font-bold md:leading-snug leading-snug">
-              For the Love of Delicious <span className="text-green">Food</span>
-            </h2>
-            <p className="text-[#4A4A4A] text-xl md:w-4/5 mx-auto">
-              Come with family & feel the joy of mouthwatering food such as
-              Greek Salad, Lasagne, Butternut Pumpkin, Tokusen Wagyu, Olivas
-              Rellenas and more for a moderate cost
-            </p>
-            <button className="bg-green font-semibold btn text-white px-8 py-3 rounded-full">
-              Order Now
-            </button>
+  <h2 className="md:text-5xl text-4xl font-bold md:leading-snug leading-snug">
+    For the Love of Efficient <span className="text-green">Management</span>
+  </h2>
+  <p className="text-[#4A4A4A] text-xl md:w-4/5 mx-auto">
+    Simplify operations with advanced inventory tools and streamlined processes.
+  </p>
+  <button className="bg-green font-semibold btn text-white px-8 py-3 rounded-full">
+    Learn More
+  </button>
           </div>
         </div>
       </div>
@@ -116,31 +114,31 @@ const Menu = () => {
               onClick={() => filterItems("salad")}
               className={selectedCategory === "salad" ? "active" : ""}
             >
-              Salad
+             Food-Product
             </button>
             <button
               onClick={() => filterItems("pizza")}
               className={selectedCategory === "pizza" ? "active" : ""}
             >
-              Pizza
+              Electronics
             </button>
             <button
               onClick={() => filterItems("soup")}
               className={selectedCategory === "soup" ? "active" : ""}
             >
-              Soups
+              Clothes
             </button>
             <button
               onClick={() => filterItems("dessert")}
               className={selectedCategory === "dessert" ? "active" : ""}
             >
-              Desserts
+              Drinks
             </button>
             <button
               onClick={() => filterItems("drinks")}
               className={selectedCategory === "drinks" ? "active" : ""}
             >
-              Drinks
+              Fruits
             </button>
           </div>
 

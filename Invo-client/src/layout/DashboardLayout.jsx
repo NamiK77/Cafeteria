@@ -71,7 +71,7 @@ const DashboardLayout = () => {
           {/* Sidebar content here */}
           <li>
             <Link to="/dashboard" className="flex justify-start mb-3">
-              <img src={logo} alt="" className="w-20" />
+            <img src={logo} alt="A Logo" height={50} width={50} draggable={false} style={{borderRadius: '50%'}} />
               <span className="badge badge-primary">admin</span>
             </Link>
           </li>
@@ -81,11 +81,7 @@ const DashboardLayout = () => {
               <MdDashboard /> Dashboard
             </Link>
           </li>
-          <li>
-            <Link to="/dashboard">
-              <FaShoppingBag /> Manage Bookings
-            </Link>
-          </li>
+         
           <li>
             <Link to="/dashboard/add-menu">
               <FaPlusCircle />

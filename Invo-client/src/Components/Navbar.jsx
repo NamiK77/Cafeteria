@@ -32,22 +32,22 @@ const Navbar = () => {
   const navItems = (
     <>
       <li>
-        <a href="/" className="text-green">
+        <a href="/" className="text-yellow-600">
           Home
         </a>
       </li>
       <li tabIndex={0}>
         <details>
-          <summary>Menu</summary>
+          <summary>Items</summary>
           <ul className="p-2">
             <li>
               <a href="/menu">All</a>
             </li>
             <li>
-              <a>Salad</a>
+              <a>Food-product</a>
             </li>
             <li>
-              <a>Pizza</a>
+              <a>Electronics</a>
             </li>
           </ul>
         </details>
@@ -110,7 +110,7 @@ const Navbar = () => {
             </ul>
           </div>
           <a href="/">
-            <img src={logo} alt="" />
+          <img src={logo} alt="A Logo" height={50} width={50} draggable={false} style={{borderRadius: '50%'}} />
           </a>
         </div>
         <div className="navbar-center hidden lg:flex">

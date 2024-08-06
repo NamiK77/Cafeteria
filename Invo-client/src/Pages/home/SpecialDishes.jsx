@@ -4,8 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Cards from "../../Components/Cards";
-import { FaAngleRight, FaAngleLeft  } from "react-icons/fa6";
-
+import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
 
 const SimpleNextArrow = (props) => {
   const { className, style, onClick } = props;
@@ -15,9 +14,9 @@ const SimpleNextArrow = (props) => {
       style={{ ...style, display: "block", background: "red" }}
       onClick={onClick}
     >
-       NEXT
-     </div>
-   );
+      NEXT
+    </div>
+  );
 };
 
 const SimplePrevArrow = (props) => {
@@ -42,11 +41,9 @@ const SpecialDishes = () => {
       .then((res) => res.json())
       .then((data) => {
         const specials = data.filter((item) => item.category === "popular");
-        // console.log(specials)
         setRecipes(specials);
       });
   }, []);
-
 
   const settings = {
     dots: true,
@@ -87,34 +84,36 @@ const SpecialDishes = () => {
   };
   return (
     <div className="max-w-screen-2xl container mx-auto xl:px-24 px-4 my-20 relative">
-       <div className='text-left'>
-            <p className='subtitle'>Special dishes</p>
-            <h2 className='title md:w-[520px]'>Standout Dishes From our Menu</h2>
-        </div>
+      <div className="text-left">
+        <p className="subtitle">Inventory Highlights</p>
+        <h2 className="title md:w-[520px]">Key Items in Your Inventory</h2>
+      </div>
 
-        {/* Arrow btn */}
-
-        <div className="md:absolute right-3 top-8 mb-10 md:mr-24">
-        <button onClick={() => slider?.current?.slickPrev()}
-        className=" btn p-2 rounded-full ml-5"
+      {/* Arrow btn */}
+      <div className="md:absolute right-3 top-8 mb-10 md:mr-24">
+        <button
+          onClick={() => slider?.current?.slickPrev()}
+          className="btn p-2 rounded-full ml-5"
         >
-        <FaAngleLeft className=" h-8 w-8 p-1"/>
+          <FaAngleLeft className="h-8 w-8 p-1" />
         </button>
         <button
           className="bg-green btn p-2 rounded-full ml-5"
           onClick={() => slider?.current?.slickNext()}
         >
-          <FaAngleRight className=" h-8 w-8 p-1"/>
+          <FaAngleRight className="h-8 w-8 p-1" />
         </button>
-        </div>
-      
+      </div>
 
-      <Slider ref={slider} {...settings} className="overflow-hidden mt-10 space-x-5">
+      <Slider
+        ref={slider}
+        {...settings}
+        className="overflow-hidden mt-10 space-x-5"
+      >
         {recipes.map((item, i) => (
-          <Cards item={item} key={i}/>
+          <Cards item={item} key={i} />
         ))}
       </Slider>
-
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import logo from "/logo.png";
 
 
 const Footer = () => {
@@ -8,10 +9,10 @@ const Footer = () => {
       <footer className={`footer xl:px-24 py-10 px-4 text-base-content 
         `}>
         <aside>
-          <img src="/logo.png" alt="" />
-          <p className="my-3 md:w-40">
-            Savor the artistry where every dish is a culinary masterpiece
-          </p>
+        <img src={logo} alt="A Logo" height={50} width={50} draggable={false} style={{borderRadius: '50%'}} />
+        <p className="my-3 md:w-40">
+  Experience precision and efficiency with every feature of our advanced inventory management system.
+</p>
         </aside>
         <nav>
           <header className="footer-title text-black">Useful links</header>

@@ -1,11 +1,12 @@
 import React from "react";
 
 const serviceLists = [
-    {id:1, title: "Catering", des: "Delight your guests with our flavors and  presentation", img: "/images/home/services/icon1.png"},
-    {id:2, title: "Fast delivery", des: "We deliver your order promptly to your door", img: "/images/home/services/icon2.png"},
-    {id:3, title: "Online Ordering", des: "Explore menu & order with ease using our Online Ordering n", img: "/images/home/services/icon3.png"},
-    {id:4, title: "Gift Cards", des: "Give the gift of exceptional dining with Foodi Gift Cards", img: "/images/home/services/icon4.png"},
-]
+  {id:1, title: "Membership Organization", des: "Automated product management and efficient billing system integration.", img: "/images/home/services/8.png"},
+  {id:2, title: "Secure & Security", des: "Reliable, prompt delivery to your door with full security.", img: "/images/home/services/12.png"},
+  {id:3, title: "Inventory Management", des: "Streamlined product management with complete automation and tracking.", img: "/images/home/services/10.png"},
+  {id:4, title: "Billing System", des: "Efficient billing system integration with advanced inventory management.", img: "/images/home/services/11.png"},
+];
+
 
 const OurServices = () => {
   return (
@@ -16,9 +17,7 @@ const OurServices = () => {
             <p className="subtitle">Our Story & Services</p>
             <h2 className="title">Our Culinary Journey And Services</h2>
             <p className="my-5 text-secondary leading-[30px]">
-              Rooted in passion, we curate unforgettable dining experiences and
-              offer exceptional services, blending culinary artistry with warm
-              hospitality.
+            "Driven by innovation, we deliver a seamless inventory management experience, combining cutting-edge technology with intuitive design to streamline your operations and enhance efficiency.
             </p>
 
             <button className="bg-green font-semibold btn text-white px-8 py-3 rounded-full">
