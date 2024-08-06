@@ -1,5 +1,6 @@
 import React from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import users from "../admin/Users"
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import { FaBook, FaDollarSign, FaUsers } from "react-icons/fa";
@@ -96,7 +97,7 @@ const Dashboard = () => {
             <FaUsers className="text-3xl"></FaUsers>
           </div>
           <div className="stat-title">Users</div>
-          <div className="stat-value">{stats.users}</div>
+          <div className="stat-value">{users.length}</div>
           <div className="stat-desc">↗︎ 400 (22%)</div>
         </div>
 

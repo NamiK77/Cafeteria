@@ -28,7 +28,7 @@ const sharedLinks = (
         <Link to="/menu"><FaCartShopping/> Menu</Link>
     </li>
     <li>
-        <Link to="/menu"><FaLocationArrow/> Orders Tracking</Link>
+        <Link to="/menu"><FaLocationArrow/> Notes</Link>
     </li>
     <li>
         <Link to="/menu"><FaQuestionCircle/> Customer Support</Link>
