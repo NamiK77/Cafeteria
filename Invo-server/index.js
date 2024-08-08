@@ -39,6 +39,7 @@ app.post('/jwt', async(req, res) => {
   res.send({token});
 })
 
+
 // verify jwt token middleware
 
 const verifyToken = (req, res , next) =>{

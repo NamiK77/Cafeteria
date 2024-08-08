@@ -55,7 +55,7 @@ const UpdateMenu = () => {
   return (
     <div className="w-full md:w-[870px] px-4 mx-auto">
       <h2 className="text-2xl font-semibold my-4">
-        Update This <span className="text-green">Menu Item</span>
+        Update This <span className="text-green">Invo Item</span>
       </h2>
 
       {/* form here */}

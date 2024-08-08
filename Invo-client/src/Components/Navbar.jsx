@@ -60,7 +60,7 @@ const Navbar = () => {
               <a>Membership Organization</a>
             </li>
             <li>
-              <a>Secure & Security</a>
+              <a>Security</a>
             </li>
             <li>
               <a>Inventory Management</a>
